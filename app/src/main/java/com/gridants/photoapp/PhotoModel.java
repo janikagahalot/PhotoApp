@@ -5,6 +5,24 @@ package com.gridants.photoapp;
  */
 public class PhotoModel {
 
-    String photoPath;
+    private String filePath;
+    private Integer lastModified;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Integer getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Integer lastModified) {
+        this.lastModified = lastModified;
+    }
+
 
 }
