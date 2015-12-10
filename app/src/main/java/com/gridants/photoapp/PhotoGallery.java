@@ -43,8 +43,8 @@ public class PhotoGallery extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(FILE_PATH, file.getAbsolutePath());
-        Integer time  = Integer.parseInt(String.valueOf(file.lastModified()));
-        contentValues.put(LAST_MODIFIED, time);
+//        Integer time  = Integer.parseInt(String.valueOf(file.lastModified()));
+    //    contentValues.put(LAST_MODIFIED, time);
         db.insert(TABLE_IMAGES, null, contentValues);
     }
 
