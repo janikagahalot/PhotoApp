@@ -24,5 +24,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.facebook.fresco:fresco:0.7.0+'
     compile "com.squareup.picasso:picasso:2.4.0"
+    compile 'com.android.support:recyclerview-v7:+'
 
 }
