@@ -20,6 +20,10 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by prats on 10/12/15.
@@ -32,6 +36,8 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
     RecyclerView mRecyclerView;
     static final int RESULT_PIC = 1;
     Context context;
+    PhotoGallery photoGallery;
+    List<PhotoModel> photoModels = new ArrayList<>();
 
     public static PhotoFragment newInstance(){
         PhotoFragment fragment = new PhotoFragment();
@@ -41,11 +47,17 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        photoGallery = new PhotoGallery(getActivity());
     }
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Intent pickPicture =new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickPicture.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(pickPicture, RESULT_PIC);
         return inflater.inflate(R.layout.fragment_layout, container, false);
+
     }
 
     @Override
@@ -60,8 +72,14 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent pickPicture =new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickPicture, RESULT_PIC);
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(
+//                Intent.createChooser(intent, "Select Picture"),
+//                RESULT_PIC);
+     //   Intent pickPicture =new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+       // startActivityForResult(pickPicture, RESULT_PIC);
     }
 
 
@@ -72,11 +90,14 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-//            try {
-//                Bitmap bitmap =MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-//                picture.setImageBitmap(bitmap);
-//            } catch (IOException e) {
-//                e.printStackTrace();
+//            if(cursor.moveToFirst()) {
+//                              do {
+//                                      int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                                       String picturePath = cursor.getString(columnIndex);
+//                                       File file  = new File(picturePath);
+//                                       photoGallery.addImage(file);
+//                                   }
+//                              while(cursor.moveToNext());
 //            }
 
             Cursor cursor = getActivity().getContentResolver().query(selectedImage,
@@ -91,6 +112,8 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
             }
             Picasso.with(getActivity()).load(uri).into(picture);
 
+
         }
+
     }
 }
