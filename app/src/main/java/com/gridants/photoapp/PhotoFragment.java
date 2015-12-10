@@ -4,14 +4,11 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +20,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by prats on 10/12/15.
@@ -94,8 +90,7 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "URL PRESENT" , Toast.LENGTH_LONG).show();
             }
             Picasso.with(getActivity()).load(uri).into(picture);
-             //path.setText(uri.toString());
-           // picture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
         }
     }
 }
