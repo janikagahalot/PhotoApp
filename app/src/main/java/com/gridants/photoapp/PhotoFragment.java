@@ -85,17 +85,14 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
 
             Cursor cursor = getActivity().getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            Uri uri = Uri.fromFile(new File(picturePath));
-            cursor.close();
-            if(picturePath != null){
-                Toast.makeText(getActivity(), "URL PRESENT" , Toast.LENGTH_LONG).show();
+            if(cursor.moveToFirst()) {
+                do {
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    File file  = new File(picturePath);
+                    imagedbhelper.addImage(file);
+                }
+                while(cursor.moveToNext());
             }
-            Picasso.with(getActivity()).load(uri).into(picture);
-             //path.setText(uri.toString());
-           // picture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-        }
     }
 }
