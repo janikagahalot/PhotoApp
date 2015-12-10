@@ -103,7 +103,6 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
 //            }
 
 
-
                 Uri selectedImageUri = data.getData();
 
                 String[] projection = { MediaStore.Images.Media.DATA };
@@ -122,5 +121,6 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
            photoGallery.addImage(new File(selectedImagePath));
 
         }
+
     }
 }
